@@ -71,4 +71,15 @@ def create_todo():
     return jsonify(rows)
 
 
+@app.route('/todos/<int:id>', methods=['DELETE'])
+def delete_todo(id):
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("""
+        DELETE FROM todo WHERE id='{0}';
+    """.format(id))
+    conn.commit()
+    return jsonify({'message': 'successfully deleted'})
+
+
 app.run(host='0.0.0.0', port=8080)

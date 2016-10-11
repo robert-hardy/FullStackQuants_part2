@@ -1,21 +1,21 @@
 from flask import render_template
 
 
+from app.db import connect_db
 from app.flasky import app
 
 
 @app.route('/')
 def homepage():
-    rows = [
-        {
-            'title': 'Buy a big book',
-            'notes': 'A red one'
-        },
-        {
-            'title': 'Buy a shiny pen',
-            'notes': 'blue ink'
-        }
-    ]
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT
+            *
+        FROM
+            todo
+    """)
+    rows = cur.fetchall()
 
     return render_template(
         'homepage.html',

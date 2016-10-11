@@ -5,7 +5,8 @@
 <body>
   <h1>To do list</h1>
   <ul>
-    <li>Buy a book.</li>
-    <li>Buy a pen.</li>
+    {% for row in rows %}
+    <li>{{ row.title }}, {{ row.notes}}</li>
+    {% endfor %}
   </ul>
 </body>

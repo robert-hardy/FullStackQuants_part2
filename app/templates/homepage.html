@@ -30,7 +30,7 @@
     })
     .then(function(todos) {
         var html_template = '<li class="list-group-item"><%= title %>, <%= notes %>';
-        html_template = html_template + '<button id="<%= id %>" class="del-todo btn btn-warning pull-right"><span class="glyphicon glyphicon-trash"></span></button></li>';
+        html_template = html_template + '<button id="<%= id %>" class="del-todo btn btn-xs btn-warning pull-right"><span class="glyphicon glyphicon-trash"></span></button></li>';
         var tmpl = _.template(html_template);
         var html_content = _.reduce(todos, function(acc, item) {
           return acc.concat(tmpl(item)).concat('\n');

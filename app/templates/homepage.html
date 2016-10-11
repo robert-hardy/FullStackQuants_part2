@@ -3,11 +3,18 @@
   <title>Things to do</title>
 </head>
 <body>
-  <h1>To do list</h1>
-  <ul>
-    {% for row in rows %}
-    <li>{{ row.title }}, {{ row.notes}}</li>
-    {% endfor %}
-  </ul>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <h1>To do list</h1>
+        </div>
+      </div>
+      <ul class="list-group">
+        {% for row in rows %}
+        <li class="list-group-item">{{ row.title }}, {{ row.notes}}</li>
+        {% endfor %}
+      </ul>
+  </div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
 </body>

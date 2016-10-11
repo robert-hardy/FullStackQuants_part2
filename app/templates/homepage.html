@@ -25,7 +25,12 @@
         url: '/todos'
     })
     .then(function(todos) {
-        var foo = 1;
+        var html_template = '<li class="list-group-item">JS did this -- <%= title %>, <%= notes %></li>';
+        var tmpl = _.template(html_template);
+        var html_content = _.reduce(todos, function(acc, item) {
+          return acc.concat(tmpl(item)).concat('\n');
+        }, "");
+        $('ul').html(html_content);
     });
   </script>
 </body>

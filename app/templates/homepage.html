@@ -40,6 +40,16 @@
     $('#add').click(function() {
       var title = $('#title').val();
       var notes = $('#notes').val();
+      $.ajax(
+        {
+          url: '/todos',
+          type: 'POST',
+          data: JSON.stringify({title: title, notes: notes}),
+          contentType: 'application/json'
+        })
+      .then(function(id) {
+        console.log(id);
+      });
     });
   </script>
 </body>

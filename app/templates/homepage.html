@@ -36,6 +36,14 @@
           return acc.concat(tmpl(item)).concat('\n');
         }, "");
         $('ul').html(html_content);
+
+        $('.del-todo').click(function() {
+          var id = $(this).attr('id');
+          $.ajax({
+            url: '/todos/' + id,
+            type: 'DELETE'
+          });
+        });
     });
 
     $('#add').click(function() {
@@ -47,7 +55,7 @@
           type: 'POST',
           data: JSON.stringify({title: title, notes: notes}),
           contentType: 'application/json'
-        })
+      })
       .then(function(id) {
         console.log(id);
       });

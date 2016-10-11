@@ -1,6 +1,7 @@
 from flask import (
     jsonify,
-    render_template
+    render_template,
+    request
 )
 
 
@@ -38,5 +39,36 @@ def get_todos():
     """)
     rows = cur.fetchall()
     return jsonify(rows)
+
+
+@app.route('/todos', methods=['POST'])
+def create_todo():
+    title = request.json.get('title', None)
+    notes = request.json.get('notes', None)
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO
+            todo
+        (
+            title,
+            notes
+        )
+        VALUES
+        (?, ?)
+    """, (title, notes))
+    conn.commit()
+    id = cur.lastrowid
+    cur.execute("""
+        SELECT
+            *
+        FROM
+            todo
+        WHERE
+            id = '{0}';
+    """.format(id))
+    rows = cur.fetchall()
+    return jsonify(rows)
+
 
 app.run(host='0.0.0.0', port=8080)
